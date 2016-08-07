@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "655775862483",
+    "firebase_url": "https://messengergame.firebaseio.com",
+    "project_id": "messengergame",
+    "storage_bucket": "messengergame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655775862483:android:dcd38e1d97f89d6d",
+        "android_client_info": {
+          "package_name": "com.games.gamingmessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655775862483-3n5jeocehlo2k2pgs05e33qm2fbmmn0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYiV2_fBXyO6Ayk1ZN0cRpnyelKrl2aDg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
