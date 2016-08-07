@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: GAMES - PENALTY SHOOT OUT, JUGGLING, TIC TAC TOE,BASKETBALL AND SOME MORE GAMES...
 
+    //TODO : DO NOT WRITE BIG CODES IN ACTIVITIES ...RATHER MAKE SEPARATE CLASSES
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
