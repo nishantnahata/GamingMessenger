@@ -13,8 +13,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -35,7 +34,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public static final int RC_SIGN_IN=2401;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent i2;
+        i2 = getIntent();
+        if (i2 != null) {
+            if (i2.getBooleanExtra("EXIT", false)) {
+                finish();
+            }
+        }
+
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
@@ -46,12 +55,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+        {
+            Intent i=new Intent(this,BounceTheBall.class);
+            startActivity(i);
+        }
+    }
+
     public void getSignIn()
     {
         SharedPreferences userDetails;
         GoogleApiClient apiClient;
         userDetails=getPreferences(Context.MODE_PRIVATE);
-        GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         apiClient=new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
         signIn=new GoogleSignIn(userDetails,apiClient,this);
 
@@ -72,6 +91,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             signIn.handleSignInResult(data);
         }
 
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        if(signIn!=null)
+        {
+            if (signIn.mAuthListener != null) {
+                signIn.mAuth.removeAuthStateListener(signIn.mAuthListener);
+            }
+        }
     }
 }
 

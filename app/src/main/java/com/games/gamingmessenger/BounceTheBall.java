@@ -1,5 +1,6 @@
 package com.games.gamingmessenger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -101,4 +102,21 @@ public class BounceTheBall extends AppCompatActivity {
                 .start();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent i2=new Intent(this,MainActivity.class);
+        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i2.putExtra("EXIT", true);
+        startActivity(i2);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i2=new Intent(this,MainActivity.class);
+        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i2.putExtra("EXIT", true);
+        startActivity(i2);
+    }
 }

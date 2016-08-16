@@ -6,14 +6,21 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="50dp"
+    android:paddingTop="130dp"
     android:layout_centerHorizontal="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.games.gamingmessenger.MainActivity">
+    tools:context="com.games.gamingmessenger.MainActivity"
+    android:background="@drawable/background">
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:id="@+id/sign_in_button"
+    android:layout_width="150dp"
+    android:layout_height="70dp" />
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Sign In"-->
+        <!--android:textSize="50dp"-->
+        <!--android:gravity="center_horizontal"/>-->
 </LinearLayout>

@@ -1,15 +1,25 @@
 package com.games.gamingmessenger;
 
-import android.app.ProgressDialog;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.concurrent.Executor;
 
 
 public class GoogleSignIn{
@@ -18,11 +28,32 @@ public class GoogleSignIn{
     GoogleSignInAccount account;
     GoogleApiClient apiClient;
     Context c;
-
+    public FirebaseAuth mAuth;
+    public FirebaseAuth.AuthStateListener mAuthListener;
     public GoogleSignIn(SharedPreferences userDetails, GoogleApiClient apiClient, Context c) {
         this.userDetails = userDetails;
         this.apiClient = apiClient;
         this.c = c;
+        // [START initialize_auth]
+        mAuth = FirebaseAuth.getInstance();
+        // [END initialize_auth]
+
+        // [START auth_state_listener]
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                } else {
+                    // User is signed out
+                }
+                // [START_EXCLUDE]
+                // [END_EXCLUDE]
+            }
+        };
+        // [END auth_state_listener]
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     public Intent signIn()
@@ -46,8 +77,33 @@ public class GoogleSignIn{
         if(result.isSuccess())
         {
             account=result.getSignInAccount();
+            firebaseAuthWithGoogle(account);
             Toast.makeText(c, "Hello "+account.getDisplayName()+"!", Toast.LENGTH_LONG).show();
+            Intent i=new Intent(c,BounceTheBall.class);
+            c.startActivity(i);
         }
+    }
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        // [START_EXCLUDE silent]
+        // [END_EXCLUDE]
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener((Activity) c, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(c, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        // [START_EXCLUDE]
+                        // [END_EXCLUDE]
+                    }
+                });
     }
 
 }
