@@ -28,9 +28,10 @@ public class GoogleSignIn{
     GoogleSignInAccount account;
     GoogleApiClient apiClient;
     Context c;
-    public FirebaseAuth mAuth;
+    Intent i=null;
+    public static FirebaseAuth mAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
-    public GoogleSignIn(SharedPreferences userDetails, GoogleApiClient apiClient, Context c) {
+    public GoogleSignIn(SharedPreferences userDetails, GoogleApiClient apiClient, final Context c) {
         this.userDetails = userDetails;
         this.apiClient = apiClient;
         this.c = c;
@@ -44,6 +45,7 @@ public class GoogleSignIn{
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+
                     // User is signed in
                 } else {
                     // User is signed out
@@ -71,7 +73,7 @@ public class GoogleSignIn{
 //        });
 //
 //    }
-    public void handleSignInResult(Intent data)
+    public Intent handleSignInResult(Intent data)
     {
         GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
         if(result.isSuccess())
@@ -79,9 +81,9 @@ public class GoogleSignIn{
             account=result.getSignInAccount();
             firebaseAuthWithGoogle(account);
             Toast.makeText(c, "Hello "+account.getDisplayName()+"!", Toast.LENGTH_LONG).show();
-            Intent i=new Intent(c,BounceTheBall.class);
-            c.startActivity(i);
+            i=new Intent(c,ChatList.class);
         }
+        return i;
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         // [START_EXCLUDE silent]
