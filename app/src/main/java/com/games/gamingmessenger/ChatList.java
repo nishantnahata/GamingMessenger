@@ -158,7 +158,8 @@ public class ChatList extends AppCompatActivity {
         et.setText("");
         Map<String, Object> map=new HashMap<>();
         map.put(String.valueOf(SystemClock.currentThreadTimeMillis()),username+" : "+s);
-        ref.updateChildren(map);
+        ref.push().setValue(username+" : "+s);
+        //ref.updateChildren(map);
     }
     @Override
     protected void onStop() {
