@@ -1,6 +1,7 @@
 package com.games.gamingmessenger;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,18 +24,17 @@ import java.util.concurrent.Executor;
 
 
 public class GoogleSignIn{
-    private static final String TAG = "SignInActivity";
-    SharedPreferences userDetails;
     GoogleSignInAccount account;
     GoogleApiClient apiClient;
     Context c;
+    ProgressDialog dialog;
     Intent i=null;
     public static FirebaseAuth mAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
-    public GoogleSignIn(SharedPreferences userDetails, GoogleApiClient apiClient, final Context c) {
-        this.userDetails = userDetails;
+    public GoogleSignIn( GoogleApiClient apiClient, final Context c) {
         this.apiClient = apiClient;
         this.c = c;
+        showProgressDialog();
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
@@ -81,6 +81,7 @@ public class GoogleSignIn{
             account=result.getSignInAccount();
             firebaseAuthWithGoogle(account);
             Toast.makeText(c, "Hello "+account.getDisplayName()+"!", Toast.LENGTH_LONG).show();
+            hideProgressDialog();
             i=new Intent(c,ChatList.class);
         }
         return i;
@@ -106,6 +107,24 @@ public class GoogleSignIn{
                         // [END_EXCLUDE]
                     }
                 });
+    }
+    public void showProgressDialog()
+    {
+        if(dialog==null)
+        {
+            dialog=new ProgressDialog(c);
+            dialog.setMessage("Loading");
+            dialog.setIndeterminate(true);
+        }
+        dialog.show();
+    }
+    public void hideProgressDialog()
+    {
+        if(dialog!=null)
+        {
+            if(dialog.isShowing())
+                dialog.hide();
+        }
     }
 
 }
