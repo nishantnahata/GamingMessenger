@@ -36,7 +36,7 @@ public class GoogleSignIn{
         this.apiClient = apiClient;
         this.c = c;
         Log.d(MainActivity.TAG, "GoogleSignIn: show progress dialog");
-        showProgressDialog();
+        //showProgressDialog();
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
@@ -50,7 +50,7 @@ public class GoogleSignIn{
 
                     hideProgressDialog();
                     i=new Intent(c,ChatList.class);
-                    i.putExtra(MainActivity.USER_NAME,mAuth.getCurrentUser().getDisplayName());
+                    i.putExtra(MainActivity.USER_NAME,user.getDisplayName());
                     c.startActivity(i);
                     // User is signed in
                 } else {

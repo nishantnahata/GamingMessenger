@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent i=new Intent(this,ChatList.class);
             i.putExtra(USER_NAME,user.getDisplayName());
             startActivity(i);
+            finish();
         }
     }
 

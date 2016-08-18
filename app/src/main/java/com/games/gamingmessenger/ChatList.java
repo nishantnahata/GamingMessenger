@@ -65,6 +65,7 @@ public class ChatList extends AppCompatActivity {
                 String val=dataSnapshot.getValue().toString();
                 chats.add(chats.size(),val);
                 adapter.notifyDataSetChanged();
+                lv.smoothScrollToPosition(chats.size());
             }
 
             @Override
@@ -164,18 +165,19 @@ public class ChatList extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Intent i2=new Intent(this,MainActivity.class);
-        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i2.putExtra("EXIT", true);
-        startActivity(i2);
+//        Intent i2=new Intent(this,MainActivity.class);
+//        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        i2.putExtra("EXIT", true);
+//        startActivity(i2);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i2=new Intent(this,MainActivity.class);
-        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i2.putExtra("EXIT", true);
-        startActivity(i2);
+        //finishAffinity();
+//        Intent i2=new Intent(this,MainActivity.class);
+//        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        i2.putExtra("EXIT", true);
+//        startActivity(i2);
     }
 }
