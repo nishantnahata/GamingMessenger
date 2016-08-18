@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\Users\Lenovo\AndroidStudioProjects\GamingMessenger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="24.0.0"
-        sha1="60e15a8c510bfcc4122ee07414d7a0e989752cf3">
-        <dex dex="C:\Users\Lenovo\AndroidStudioProjects\GamingMessenger\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_0458c3f894aa7f265f33157e424c2be575fd2b36\classes.dex" />
-    </item>
-
-</items>

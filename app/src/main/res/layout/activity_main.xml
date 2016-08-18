@@ -10,8 +10,7 @@
     android:layout_centerHorizontal="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.games.gamingmessenger.MainActivity"
-    android:background="@drawable/background">
+    tools:context="com.games.gamingmessenger.MainActivity">
 
     <com.google.android.gms.common.SignInButton
     android:id="@+id/sign_in_button"
