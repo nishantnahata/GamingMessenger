@@ -20,9 +20,6 @@
         <activity android:name=".BounceTheBall" />
         <activity android:name=".ChatList" />
 
-        <service
-            android:name=".MyIntentService"
-            android:exported="false"></service>
     </application>
 
 </manifest>
