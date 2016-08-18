@@ -72,13 +72,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==RC_SIGN_IN)
         {
-            Intent i=signIn.handleSignInResult(data);
+            signIn.handleSignInResult(data);
             Log.d(TAG, "onActivityResult: main activity");
-            if (i!=null)
-            {
-                i.putExtra(USER_NAME,signIn.mAuth.getCurrentUser().getDisplayName());
-                startActivity(i);
-            }
         }
 
     }

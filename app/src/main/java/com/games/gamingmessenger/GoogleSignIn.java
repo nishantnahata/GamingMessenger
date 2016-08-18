@@ -48,6 +48,10 @@ public class GoogleSignIn{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
 
+                    hideProgressDialog();
+                    i=new Intent(c,ChatList.class);
+                    i.putExtra(MainActivity.USER_NAME,mAuth.getCurrentUser().getDisplayName());
+                    c.startActivity(i);
                     // User is signed in
                 } else {
                     // User is signed out
@@ -76,7 +80,7 @@ public class GoogleSignIn{
 //        });
 //
 //    }
-    public Intent handleSignInResult(Intent data)
+    public void handleSignInResult(Intent data)
     {
         GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
         if(result.isSuccess())
@@ -85,16 +89,13 @@ public class GoogleSignIn{
             account=result.getSignInAccount();
             firebaseAuthWithGoogle(account);
             Toast.makeText(c, "Hello "+account.getDisplayName()+"!", Toast.LENGTH_LONG).show();
-            hideProgressDialog();
-            i=new Intent(c,ChatList.class);
+
         } else {
             hideProgressDialog();
             Toast.makeText(c, "handleSignReturns null code:"
                    + result.getStatus().getStatusCode(), Toast.LENGTH_SHORT).show();
             Log.d(MainActivity.TAG, "handleSignInResult msg: " + result.getStatus().getStatusMessage());
         }
-        if(i==null) hideProgressDialog();
-        return i;
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         // [START_EXCLUDE silent]

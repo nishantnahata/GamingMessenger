@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Lenovo\AndroidStudioProjects\GamingMessenger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\nisha\Desktop\CO\GamingMessenger\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="24.0.0"
-        sha1="d11eeed8c0f2e55b2de4dcd08313a39e6da829ce">
-        <dex dex="C:\Users\Lenovo\AndroidStudioProjects\GamingMessenger\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_0458c3f894aa7f265f33157e424c2be575fd2b36\classes.dex" />
+        sha1="e620050fd62d7a0e249920848eb72faf626547fa">
+        <dex dex="C:\Users\nisha\Desktop\CO\GamingMessenger\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_3a88272120ff6a0391f86dfaf59db467dd0fbe70\classes.dex" />
     </item>
 
 </items>
