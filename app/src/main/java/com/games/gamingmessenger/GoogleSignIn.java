@@ -50,7 +50,7 @@ public class GoogleSignIn{
 
                     hideProgressDialog();
                     i=new Intent(c,ChatList.class);
-                    i.putExtra(MainActivity.USER_NAME,mAuth.getCurrentUser().getDisplayName());
+                    i.putExtra(MainActivity.USER_NAME,user.getDisplayName());
                     c.startActivity(i);
                     // User is signed in
                 } else {
@@ -70,16 +70,6 @@ public class GoogleSignIn{
         Intent signIntent= Auth.GoogleSignInApi.getSignInIntent(apiClient);
         return signIntent;
     }
-//    private void signOut()
-//    {
-//        Auth.GoogleSignInApi.signOut(apiClient).setResultCallback(new ResultCallback<Status>() {
-//            @Override
-//            public void onResult(Status status) {
-//                Toast.makeText(c, "Signed out Succesfully!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
     public void handleSignInResult(Intent data)
     {
         GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
