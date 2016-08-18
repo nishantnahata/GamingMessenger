@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,6 +157,7 @@ public class ChatList extends AppCompatActivity {
         String s=et.getText().toString();
         et.setText("");
         Map<String, Object> map=new HashMap<>();
+        Log.d(MainActivity.TAG, "sendMessage: "+user.getDisplayName());
         map.put(String.valueOf(SystemClock.currentThreadTimeMillis()),username+" : "+s);
         ref.updateChildren(map);
     }

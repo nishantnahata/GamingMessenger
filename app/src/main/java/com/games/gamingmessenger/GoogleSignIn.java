@@ -89,7 +89,7 @@ public class GoogleSignIn{
             i=new Intent(c,ChatList.class);
         } else {
             hideProgressDialog();
-            Toast.makeText(MainActivity.getInstance(), "handleSignReturns null code:"
+            Toast.makeText(c, "handleSignReturns null code:"
                    + result.getStatus().getStatusCode(), Toast.LENGTH_SHORT).show();
             Log.d(MainActivity.TAG, "handleSignInResult msg: " + result.getStatus().getStatusMessage());
         }
