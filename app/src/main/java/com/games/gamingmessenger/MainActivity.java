@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed: "+connectionResult.getErrorMessage());
+        hideProgressDialog();
     }
 
     @Override
@@ -104,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             dialog.setMessage("Loading");
             dialog.setIndeterminate(true);
         }
-        dialog.show();
+        if(!dialog.isShowing())
+            dialog.show();
     }
     public void hideProgressDialog()
     {
