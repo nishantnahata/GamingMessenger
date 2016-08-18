@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -34,6 +35,7 @@ public class GoogleSignIn{
     public GoogleSignIn( GoogleApiClient apiClient, final Context c) {
         this.apiClient = apiClient;
         this.c = c;
+        Log.d(MainActivity.TAG, "GoogleSignIn: show progress dialog");
         showProgressDialog();
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
@@ -60,6 +62,7 @@ public class GoogleSignIn{
 
     public Intent signIn()
     {
+        Log.d(MainActivity.TAG, "signIn: ");
         Intent signIntent= Auth.GoogleSignInApi.getSignInIntent(apiClient);
         return signIntent;
     }
@@ -78,11 +81,17 @@ public class GoogleSignIn{
         GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
         if(result.isSuccess())
         {
+            Log.d(MainActivity.TAG, "handleSignInResult: "+result.isSuccess());
             account=result.getSignInAccount();
             firebaseAuthWithGoogle(account);
             Toast.makeText(c, "Hello "+account.getDisplayName()+"!", Toast.LENGTH_LONG).show();
             hideProgressDialog();
             i=new Intent(c,ChatList.class);
+        } else {
+            hideProgressDialog();
+            Toast.makeText(MainActivity.getInstance(), "handleSignReturns null code:"
+                   + result.getStatus().getStatusCode(), Toast.LENGTH_SHORT).show();
+            Log.d(MainActivity.TAG, "handleSignInResult msg: " + result.getStatus().getStatusMessage());
         }
         return i;
     }
@@ -122,6 +131,7 @@ public class GoogleSignIn{
     {
         if(dialog!=null)
         {
+            Log.d(MainActivity.TAG, "hideProgressDialog: ");
             if(dialog.isShowing())
                 dialog.hide();
         }

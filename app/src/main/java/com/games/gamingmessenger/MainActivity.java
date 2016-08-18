@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.Auth;
@@ -16,11 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
+    public static final String TAG = "MainActivity";
 //    private static final String TAG = "SignInActivity";
     public static final int RC_SIGN_IN=2429;
     GoogleSignIn signIn;
     ProgressDialog dialog;
-
+    private static MainActivity act;
     @Override
     protected void onStart() {
         super.onStart();
@@ -31,10 +33,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
+    public static MainActivity getInstance() {
+        if (act==null) act=new MainActivity();
+        return act;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i2;
+        act=this;
         i2 = getIntent();
         if (i2 != null) {
             if(i2.getBooleanExtra("EXIT", false))
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View view) {
                 getSignIn();
+                Log.d(TAG, "onClick: mainactivity");
             }
         });
     }
@@ -58,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Log.d(TAG, "onConnectionFailed: "+connectionResult.getErrorMessage());
     }
 
     @Override
@@ -67,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if(requestCode==RC_SIGN_IN)
         {
             Intent i=signIn.handleSignInResult(data);
+            Log.d(TAG, "onActivityResult: main activity");
             if (i!=null) startActivity(i);
         }
 
@@ -80,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void getSignIn()
     {
+        Log.d(TAG, "getSignIn: ");
 
         GoogleApiClient apiClient;
         GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
