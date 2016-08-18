@@ -157,7 +157,6 @@ public class ChatList extends AppCompatActivity {
         String s=et.getText().toString();
         et.setText("");
         Map<String, Object> map=new HashMap<>();
-        Log.d(MainActivity.TAG, "sendMessage: "+user.getDisplayName());
         map.put(String.valueOf(SystemClock.currentThreadTimeMillis()),username+" : "+s);
         ref.updateChildren(map);
     }

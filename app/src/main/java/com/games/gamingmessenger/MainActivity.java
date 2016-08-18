@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public static final int RC_SIGN_IN=2429;
     GoogleSignIn signIn;
     ProgressDialog dialog;
-    private static MainActivity act;
     public static final String USER_NAME="username";
     @Override
     protected void onStart() {
@@ -37,15 +36,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
-    public static MainActivity getInstance() {
-        if (act==null) act=new MainActivity();
-        return act;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i2;
-        act=this;
         i2 = getIntent();
         if (i2 != null) {
             if(i2.getBooleanExtra("EXIT", false))
