@@ -35,13 +35,18 @@ public class ChatList extends AppCompatActivity {
     RecyclerView lv;
     Button btn;
     DatabaseReference ref;
-    FirebaseUser user;
+    String username;
     ChatListViewAdapter adapter;
     EditText et;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
+
+        Intent i=getIntent();
+
+        username=i.getStringExtra(MainActivity.USER_NAME);
+
         lv= (RecyclerView) findViewById(R.id.lv);
         btn= (Button) findViewById(R.id.btn_send);
         chats=new ArrayList<>();
@@ -84,10 +89,6 @@ public class ChatList extends AppCompatActivity {
         findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(user==null && GoogleSignIn.mAuth==null)
-                    user= FirebaseAuth.getInstance().getCurrentUser();
-                else  if(user==null)
-                    user=GoogleSignIn.mAuth.getCurrentUser();
                 sendMessage();
             }
         });
@@ -155,7 +156,7 @@ public class ChatList extends AppCompatActivity {
         String s=et.getText().toString();
         et.setText("");
         Map<String, Object> map=new HashMap<>();
-        map.put(String.valueOf(SystemClock.currentThreadTimeMillis()),user.getDisplayName()+" : "+s);
+        map.put(String.valueOf(SystemClock.currentThreadTimeMillis()),username+" : "+s);
         ref.updateChildren(map);
     }
     @Override

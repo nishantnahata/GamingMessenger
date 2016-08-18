@@ -93,6 +93,7 @@ public class GoogleSignIn{
                    + result.getStatus().getStatusCode(), Toast.LENGTH_SHORT).show();
             Log.d(MainActivity.TAG, "handleSignInResult msg: " + result.getStatus().getStatusMessage());
         }
+        if(i==null) hideProgressDialog();
         return i;
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {

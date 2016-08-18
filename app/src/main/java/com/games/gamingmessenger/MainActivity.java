@@ -14,6 +14,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -23,12 +24,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     GoogleSignIn signIn;
     ProgressDialog dialog;
     private static MainActivity act;
+    public static final String USER_NAME="username";
     @Override
     protected void onStart() {
         super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null)
         {
             Intent i=new Intent(this,ChatList.class);
+            i.putExtra(USER_NAME,user.getDisplayName());
             startActivity(i);
         }
     }
@@ -76,7 +80,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         {
             Intent i=signIn.handleSignInResult(data);
             Log.d(TAG, "onActivityResult: main activity");
-            if (i!=null) startActivity(i);
+            if (i!=null)
+            {
+                i.putExtra(USER_NAME,signIn.mAuth.getCurrentUser().getDisplayName());
+                startActivity(i);
+            }
         }
 
     }
