@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if(requestCode==RC_SIGN_IN)
         {
             Intent i=signIn.handleSignInResult(data);
-            startActivity(i);
+            if (i!=null) startActivity(i);
         }
 
     }
