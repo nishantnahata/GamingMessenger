@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".BounceTheBall" />
-        <activity android:name=".ChatList" />
+        <activity android:name=".ChatList" android:windowSoftInputMode="adjustPan" />
 
     </application>
 
